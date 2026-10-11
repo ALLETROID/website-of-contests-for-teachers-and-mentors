@@ -1,2 +1,125 @@
-# website-of-contests-for-teachers-and-mentors
-This repository will contain the competition project for the “Sferum Hackathon”.
+# 🎓 Платформа конкурсов для учителей и педагогов
+
+Полнофункциональная веб-платформа для проведения профессиональных конкурсов среди учителей и педагогов. Позволяет организаторам публиковать конкурсы, а участникам — подавать заявки и вести портфолио.
+
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?logo=typescript)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Auth-3ECF8E?logo=supabase)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38BDF8?logo=tailwindcss)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+---
+
+## 📋 Содержание
+
+- [Возможности](#-возможности)
+- [Стек технологий](#-стек-технологий)
+- [Роли пользователей](#-роли-пользователей)
+- [Скриншоты](#-скриншоты)
+- [Быстрый старт](#-быстрый-старт)
+- [Настройка Supabase](#-настройка-supabase)
+- [Переменные окружения](#-переменные-окружения)
+- [Структура проекта](#-структура-проекта)
+- [API Reference](#-api-reference)
+- [Безопасность и RLS](#-безопасность-и-rls)
+- [Деплой на Vercel](#-деплой-на-vercel)
+- [Публикация на GitHub](#-публикация-на-github)
+- [Лицензия](#-лицензия)
+
+---
+
+## ✨ Возможности
+
+### Для пользователей (учителей)
+- 🔐 Регистрация, вход, выход, восстановление пароля
+- 👤 Личный кабинет с профилем (ФИО, регион, школа, био, аватар)
+- 📁 Портфолио: загрузка файлов (PDF, JPG, PNG до 10 МБ)
+- 📝 Подача заявок на конкурсы
+- 📊 История участия и статусы заявок
+
+### Для организаторов (операторов)
+- ➕ Создание и редактирование конкурсов
+- 🖼️ Загрузка обложек и галереи изображений
+- 📅 Управление датами, сроками и статусами
+
+### Для администраторов
+- 🛡️ Модерация заявок
+- 👥 Управление пользователями и ролями
+- 🗂️ Полный CRUD над конкурсами
+- 📈 Просмотр всех заявок и портфолио
+
+### Общее
+- 🔍 Поиск и фильтры конкурсов (статус, регион, дата)
+- 📱 Адаптивный дизайн (Tailwind CSS)
+- 🔒 Защита маршрутов через middleware и RLS
+- ⚡ SSR/SSG через Next.js App Router
+
+---
+
+## 🛠 Стек технологий
+
+| Слой | Технология |
+|------|-----------|
+| Frontend | Next.js 14 (App Router), React 18, TypeScript |
+| Стили | Tailwind CSS, shadcn/ui (Radix UI) |
+| Backend | Next.js API Routes, Supabase Edge |
+| База данных | PostgreSQL (Supabase) с RLS |
+| Аутентификация | Supabase Auth |
+| Хранилище файлов | Supabase Storage |
+| Деплой | Vercel (frontend) + Supabase (backend) |
+
+---
+
+## 👥 Роли пользователей
+
+Иерархия (от высшей к низшей):
+
+| Роль | Права |
+|------|-------|
+| `owner` | Полный доступ, управление ролями |
+| `admin` | Модерация, CRUD конкурсов, управление пользователями |
+| `operator` | Создание и редактирование конкурсов |
+| `user` | Участие в конкурсах, портфолио |
+
+> Первый зарегистрированный пользователь становится `user`. Чтобы назначить `owner` — обновите роль вручную в БД (см. ниже).
+
+---
+
+## 🖼 Скриншоты
+
+> Добавьте свои скриншоты в папку `/docs/screenshots` и раскомментируйте блок ниже.
+
+<!--
+![Главная](docs/screenshots/home.png)
+![Страница конкурса](docs/screenshots/contest.png)
+![Личный кабинет](docs/screenshots/dashboard.png)
+![Админ-панель](docs/screenshots/admin.png)
+-->
+
+---
+
+## 🚀 Быстрый старт
+
+### Требования
+- Node.js **18.17+** или **20+**
+- npm / pnpm / yarn
+- Аккаунт [Supabase](https://supabase.com)
+- Аккаунт [Vercel](https://vercel.com) (для деплоя)
+
+### Локальная установка
+
+```bash
+# 1. Клонировать репозиторий
+git clone https://github.com/your-username/teacher-contests-platform.git
+cd teacher-contests-platform
+
+# 2. Установить зависимости
+npm install
+
+# 3. Скопировать пример переменных окружения
+cp .env.local.example .env.local
+
+# 4. Заполнить .env.local (см. раздел "Переменные окружения")
+
+# 5. Запустить dev-сервер
+npm run dev
